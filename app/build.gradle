@@ -5,29 +5,63 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    def androidConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion androidConfiguration.getAt("compileSdkVersion")
+    buildToolsVersion androidConfiguration.getAt("buildToolsVersion")
+
     defaultConfig {
-        applicationId "com.sujeetkumar.catapp"
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        applicationId androidConfiguration.getAt("applicationId")
+        minSdkVersion androidConfiguration.getAt("minSdkVersion")
+        targetSdkVersion androidConfiguration.getAt("targetSdkVersion")
+        versionCode androidConfiguration.getAt("versionCode")
+        versionName androidConfiguration.getAt("versionName")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
 }
 
 dependencies {
+
+    def appDependencies = rootProject.ext.appDependencies;
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation     appDependencies.rxandroid
+    implementation     appDependencies.rxjava
+    implementation     appDependencies.androidSupport
+    implementation     appDependencies.appCompatSupport
+    implementation     appDependencies.designSupport
+    implementation     appDependencies.recyclerViewSupport
+    implementation     appDependencies.retroFit
+    implementation     appDependencies.okHttp
+    implementation     appDependencies.okHttpConnection
+    implementation     appDependencies.picasso
+    implementation     appDependencies.otto
+    implementation     appDependencies.butterknife
+    annotationProcessor   appDependencies.butterknifeCompiler
+    implementation     appDependencies.dagger
+    annotationProcessor  appDependencies.daggerCompiler
+
+    implementation     appDependencies.imageZoom
+    compileOnly    appDependencies.javaxAnnotation
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation appDependencies.constraintLayout
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation     group: 'com.squareup.retrofit2', name: 'converter-simplexml', version: appDependencies.retroFitVersion
+
 }

@@ -1,0 +1,48 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+
+    // base urls
+    okHttpUrl = "com.squareup.okhttp3:okhttp"
+    rxUrl = "io.reactivex"
+
+    // Dependencies versions
+    daggerVersion = '2.0'
+    retrofitVersion = '2.0.2'
+    okHttpVersion = '3.4.1'
+    picassoVersion = '2.5.2'
+    ottoVersion = '1.3.8'
+    butterKnifeVersion = '8.8.1'
+    supportLibraryVersion = '28.0.0-alpha1'
+    javaxAnnotationVersion = '10.0-b28'
+    imageZoomVersion = "+" // from README.md of https://github.com/sephiroth74/ImageViewZoom
+    rxversion = '1.1.0'
+    constraintLayout='1.1.2'
+
+    // Dependencies per project
+    appDependencies = [
+            daggerCompiler       : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger               : "com.google.dagger:dagger:${daggerVersion}",
+            androidSupport       : "com.android.support:support-v13:${supportLibraryVersion}",
+            appCompatSupport     : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            designSupport        : "com.android.support:design:${supportLibraryVersion}",
+            recyclerViewSupport  : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+            retroFit             : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retroFitVersion      : "${retrofitVersion}",
+            okHttp               : "${okHttpUrl}:${okHttpVersion}",
+            okHttpConnection     : "${okHttpUrl}-urlconnection:${okHttpVersion}",
+            picasso              : "com.squareup.picasso:picasso:${picassoVersion}",
+            otto                 : "com.squareup:otto:${ottoVersion}",
+            butterknife          : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterknifeCompiler  : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+            javaxAnnotation      : "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
+            imageZoom            : "it.sephiroth.android.library.imagezoom:imagezoom:${imageZoomVersion}",
+            rxjava               : "${rxUrl}:rxjava:${rxversion}",
+            rxandroid            : "${rxUrl}:rxandroid:${rxversion}",
+            constraintLayout     : "com.android.support.constraint:constraint-layout:${constraintLayout}"
+    ]
+}
